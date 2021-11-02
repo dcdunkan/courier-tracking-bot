@@ -36,13 +36,6 @@ bot.command("start", startHandler);
 bot.command("help", helpHandler);
 bot.command("about", aboutHandler);
 
-// on updates
-const textMsgHandler = require("./handlers/updates/message");
-bot.on("msg:text", textMsgHandler);
-
-const inlineQueryHandler = require("./handlers/updates/inlineQuery");
-bot.on("inline_query", inlineQueryHandler);
-
 // trackings management
 const trackingsHandler = require("./handlers/commands/trackings");
 const trackingPagesHandler = require("./handlers/callbacks/userTrackings");
@@ -71,5 +64,12 @@ const MAftershipRefreshHandler = require("./handlers/callbacks/refresh/maftershi
 bot.callbackQuery(/tmrefresh_(.+)/, trackingmoreRefreshHandler);
 bot.callbackQuery(/^asrefresh_(.+)_(.+)/, aftershipRefreshHandler);
 bot.callbackQuery(/masrefresh_(.+)/, MAftershipRefreshHandler);
+
+// on updates
+const textMsgHandler = require("./handlers/updates/message");
+const inlineQueryHandler = require("./handlers/updates/inlineQuery");
+
+bot.on("msg:text", textMsgHandler);
+bot.on("inline_query", inlineQueryHandler);
 
 module.exports = bot;
