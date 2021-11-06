@@ -1,0 +1,134 @@
+start_msg: "👋🏼 Hi there! I can track your couriers and give you the updates about it. Send me a valid tracking ID, and I will do the rest of the job.\n/help — For help message »"
+help_msg: |
+  👋🏼 Hi there! I can help you to get details and new updates of your courier.
+
+  Send me a valid tracking ID and just wait. — maximum 30 seconds. I will send you the details. I can send you updates if you enable the notification.
+
+  You can select a method to get the details of your package.
+  1. <b>Auto detection</>: Use this method if you don't know about the package carrier.
+  2. <b>Choose Carrier</>: If you do know the package carrier's name, use this method to get more accurate results easily.
+
+  /help — Shows this message.
+  /trackings — Lists the tracking IDs you currently subscribed to (enabled notification) and lets you manage them.
+  /about — About this bot including source code details.
+  /faq - Some questions you probably gonna ask eventually.
+
+  This bot fetches data from services like <a href="https://aftership.com">AfterShip</>, <a href="https://trackingmore.com">TrackingMore</>. The data might be inaccurate or sometimes you won't get the details even if the ID is valid. Consider retrying or dropping the attempts since it harms the server.
+
+  Support us by joining our channel. Bot-related updates will be posted there.
+  <a href="https://t.me/dcbots">Join our channel »</a>
+  <a href="https://en.wikipedia.org/wiki/Tracking_number">Read about tracking numbers »</a>
+
+  Any suggestions, bugs and issues can be reported to my creator — @dcdunkan — No spamming, please.
+
+  Thank you for using this bot and I hope you liked it :)
+about_msg: |
+  <b>Few things about this <a href="https://t.me/PkgTrackBot">Package Tracking bot</a></b>.
+
+  Thanks to @WideWine for hosting this bot, and for the idea and support. Join @WideWine and support them too.
+    
+  • Creator — @dcdunkan from @dcbots.
+  • Open-source — <a href="https://github.com/dcdunkan/package-tracker-bot">GitHub Repo:: dcdunkan/package-tracker-bot</> — Give it a star if you liked it.
+  • Language — JavaScript.
+  • Version — Still on Beta - v.0.1.4
+    
+  <b>— Built using / Used Libraries</>
+  • <a href="https://grammy.dev/">grammY</> — Telegram Bot Framework used for this bot. - Trust me, simple but powerful.
+  • <a href="https://pptr.dev/">Puppeteer</> — A Node library that provides a high-level API to control headless Chrome over the DevTools Protocol. - Used for fetching the details from tracking websites.
+  • <a href="https://deta.sh/">Deta Base</> — NoSQL database with unlimited storage and completely free to use. - Used as database for this project.
+    
+  <b>— Sites used to fetch details</>
+  • <a href="https://trackingmore.com">TrackingMore</>
+  • <a href="https://aftership.com">AfterShip</>
+stats_msg: |
+  Total Users: ${total_users}
+  Total Tracked: ${total_tracked}
+  Currently Tracking: ${currently_tracking}
+faq_msg: "We have some posts about the questions that you may probably ask\n<a href=\"https://telegra.ph/FAQ---Tracker-Bot-11-06\">Read the FAQ here »</>"
+trackings_msg: "📖 Here is your trackings. You can manage them here. Click on 🔕 to remove it from the trackings list and disable notification. Click 🔄 to get the latest updates of the tracking ID.\n\n<i>Showing page ${page} of ${pages}</>\n${trackings}"
+requesting: "⏳ Requesting the data..."
+updates: "🔄 <b>Updates</>\n"
+details_msg: |
+  Here is your courier details from <b>${carrier_name}</>:
+
+  Tracking ID: <code>${tracking_id}</>
+  Current Status: <b>${current_status}</>
+
+  ${updates}
+
+  🚛 Carrier: ${carrier_name}
+
+  Source: <a href="${source_url}">${source_name}</>
+    
+  Last updated: ${date}
+
+# detect.js
+trying_in_tm: 👀 Trying in <a href="https://trackingmore.com">TrackingMore</>...
+failed_in_tm: 'I couldn''t find any results from <a href="https://trackingmore.com">TrackingMore</>. Let me check on AfterShip, you can leave the notifications on, and I will notify you when the results are ready.'
+multi_possible_carriers: "🤔 Looks like there is multiple possible carriers for your tracking ID. Please wait while I find valid details from any of the possible carriers."
+checking_in_multi: "[${no}/${total}] Checking on ${carrier}..."
+failed_in_as: |
+  Oops. I couldn't find any details from AfterShip. Please verify that you have entered a valid tracking number and try again later.
+
+  <b>Related /faq posts</>
+  — How do I enter the tracking ID correclty?
+  — <a href="https://telegra.ph/But-my-tracking-ID-is-a-valid-one---Tracker-Bot-FAQ-11-04">"But, my tracking ID is valid!"</>
+one_possile_carrier: "Wooh. I got it. And there is one valid possible carrier: <b>${carrier}</>. Click the button below to get the details about it."
+choose_possible_carrier: "By the way, there is an confusion. I fetched the details of your courier. But it says that there is multiple possible carriers for your tracking ID. So, which one you pick? I can show the details about it."
+
+empty_tracking_list: "Oops. It looks like you haven't added any tracking IDs to your trackings list to get notifications on updates. Try adding one next time 😉"
+get_tracking_failed: "Oops. Problem while getting your trackings. Please try again later with /trackings."
+invalid_id: "😕 Hmm, its not a valid tracking ID, right? Please send a valid tracking ID, in order to fetch the details."
+choose_method: "Choose a method to fetch the details of your courier.\n» <b>👀 Auto-Detect</> method would be the best choice if you don't know the courier carrier. We will take your tracking ID and try to detect the courier to give you the details. Some times it won't work as expected.\n» Or, <b>📃 Choose a carrier</> to get the results more accurate and faster, but only if you know the carrier, I prefer choosing this method."
+
+remove_success: "Tracking ID ${tracking_id} has been successfully removed from your trackings list."
+remove_failed_not_exists: "Failed to remove your tracking ${tracking_id} from your trackings list. Looks like it does not actually exists in your trackings."
+remove_failed: "Failed to remove your tracking ${tracking_id} from your trackings list."
+
+adding_to_list: "🔔 Adding to Notifications... Please wait..."
+add_to_list_success: "<code>${tracking_id}</> has been added to Trackings. I will notify you on new updates. Use /trackings to manage your subscribed trackings."
+add_to_list_failed: "Couldn't add the tracking to your trackings. Please try again later."
+invalid_result: "🍕 I couldn't get the updates from ${source_name}. Please try again later."
+already_delivered: "The tracking ID <code>${tracking_id}</> has been delivered already. Therefore, there won't be any new updates, so, it cannot be added to your tracking notification list."
+exists_in_db: "The tracking ID <code>${tracking_id}</> already exists in your notification list. See /trackings to manage your notifications."
+exists_in_list: "<code>${tracking_id}</> already exists in Trackings. I will notify you on new updates. Use /trackings to manage your subscribed trackings."
+
+failed_to_fetch: "Oops. I couldn't find any details from ${service}. Please try again - it might be the issues with API stuff.\n\nLast tried: ${date}"
+
+# notify
+new_update: |
+  "✨ Hey! There is some new updates on your <code>${tracking_id}</> tracking ID.
+
+  <b>Latest update</>:
+  🕐 ${time}
+  📰 ${event}
+
+  Source: <a href="${source_url}">${source}</>
+
+  "
+new_update_delivered: "Also, the latest results says that your package has been delivered. So, we are removing this tracking ID from your /trackings list."
+choose_carrier: "🚛 Choose a tracking service from the list given below. I will try to fetch the details from that carrier, if there is. I currently only supports carriers that are available on <a href=\"https://aftership.com\">AfterShip</>. \n\n<i>Showing page <b>${page}</b> of <b>${pages}</b></>"
+
+inline:
+  switch_pm_text: "Go to bot"
+  list_empty_title: "Your tracking list is empty!"
+  list_empty_desc: "Oops, your tracking list is very clean. Try adding one next time."
+  list_empty_msg: "Oops, my tracking list is empty!"
+  end_of_results_title: "— End of results —"
+  end_of_results_desc: "That's all you have saved in your list!"
+  end_of_results_msg: "This is the end of my tracking list!"
+  result_msg: |
+    Here is your courier details from <b>${tracking.data.carrier.name}</>:
+      
+    Tracking ID: <code>${tracking.tracking_id}</>
+    Current Status: <b>${tracking.current_status}</>
+
+    <b>🔄 Latest Updates</>
+    🕐 ${tracking.latest_update.time}
+    📰 ${tracking.latest_update.event}
+
+    🚛 Carrier: ${tracking.data.carrier.name}
+
+    Source: <a href="${tracking.data.source.url}">${tracking.data.source.name}</>
+
+    Last updated: ${date}
