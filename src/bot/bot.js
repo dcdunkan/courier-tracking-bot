@@ -95,4 +95,11 @@ const { isBlock, isUnblock } = require("../helpers/filters");
 bot.on("my_chat_member:new_chat_member").filter(isBlock, blockedHandler); // if the user stops & blocks the bot, stop trying to send updates.
 bot.on("my_chat_member:new_chat_member").filter(isUnblock, unblockedHandler); // if the user unblocks and restart the bot, continue sending updates.
 
+// on updates
+const textMsgHandler = require("./handlers/updates/message");
+const inlineQueryHandler = require("./handlers/updates/inlineQuery");
+
+bot.on("msg:text", textMsgHandler);
+bot.on("inline_query", inlineQueryHandler);
+
 module.exports = bot;
